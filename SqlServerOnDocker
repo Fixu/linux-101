@@ -1,6 +1,17 @@
+https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-docker?view=sql-server-2017&pivots=cs1-bash
+
 1、拉取镜像
   docker pull mcr.microsoft.com/mssql/server:2017-latest
 2、创建运行容器
   docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=fixu@123456' \
    -p 1433:1433 --name sql_on_docker \
    -d mcr.microsoft.com/mssql/server:2017-latest
+3、修改sa密码
+  docker exec -it sql_on_docker /opt/mssql-tools/bin/sqlcmd \
+   -S localhost -U SA -P 'fixu@123456' \
+   -Q 'ALTER LOGIN SA WITH PASSWORD="fixu@123456"'
+
+4、在容器内连接sql
+  a、docker exec -it sql_on_docker "bash"
+  b、/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'fixu@123456'
+  
