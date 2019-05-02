@@ -1,0 +1,4 @@
+1、安装docker
+  先执行yum update 然后执行 yum install docker -y
+2、启动docker,后台运行
+  systemctl start docker
